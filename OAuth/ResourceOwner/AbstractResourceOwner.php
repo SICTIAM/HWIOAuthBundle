@@ -11,6 +11,7 @@
 
 namespace HWI\Bundle\OAuthBundle\OAuth\ResourceOwner;
 
+use Doctrine\ORM\EntityManager;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Exception;
 use HWI\Bundle\OAuthBundle\OAuth\Exception\HttpTransportException;
@@ -70,23 +71,49 @@ abstract class AbstractResourceOwner implements ResourceOwnerInterface
     protected $storage;
 
     /**
-     * @param HttpMethodsClient           $httpClient Httplug client
-     * @param HttpUtils                   $httpUtils  Http utils
-     * @param array                       $options    Options for the resource owner
-     * @param string                      $name       Name for the resource owner
-     * @param RequestDataStorageInterface $storage    Request token storage
+     * @var EntityManager
+     */
+    protected $entityManager;
+
+    /**
+     * @var string
+     */
+    protected $domain;
+
+    /**
+     * @var string
+     */
+    protected $client_id;
+
+    /**
+     * @var string
+     */
+    protected $client_secret;
+
+    /**
+     * @param HttpMethodsClient $httpClient Httplug client
+     * @param HttpUtils $httpUtils Http utils
+     * @param array $options Options for the resource owner
+     * @param string $name Name for the resource owner
+     * @param EntityManager $entityManager
+     * @param $domain
+     * @param RequestDataStorageInterface $storage Request token storage
      */
     public function __construct(
         HttpMethodsClient $httpClient,
         HttpUtils $httpUtils,
         array $options,
         $name,
+        EntityManager $entityManager,
+        $domain,
         RequestDataStorageInterface $storage
     ) {
         $this->httpClient = $httpClient;
         $this->httpUtils = $httpUtils;
         $this->name = $name;
         $this->storage = $storage;
+        $this->entityManager = $entityManager;
+        $this->domain = $domain;
 
         if (!empty($options['paths'])) {
             $this->addPaths($options['paths']);

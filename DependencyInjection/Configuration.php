@@ -59,6 +59,7 @@ class Configuration implements ConfigurationInterface
             'mailru',
             'odnoklassniki',
             'office365',
+            'ozwillo',
             'paypal',
             'qq',
             'reddit',
