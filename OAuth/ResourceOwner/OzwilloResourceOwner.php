@@ -41,6 +41,9 @@ class OzwilloResourceOwner extends GenericOAuth2ResourceOwner
         if ($collectivite) {
             $this->client_id = $collectivite->getOzwillo()->getClientId();
             $this->client_secret = $collectivite->getOzwillo()->getClientSecret();
+        } else {
+            $this->client_id = $this->options['client_id'];
+            $this->client_secret = $this->options['client_secret'];
         }
     }
 
