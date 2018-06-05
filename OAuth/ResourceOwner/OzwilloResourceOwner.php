@@ -48,6 +48,16 @@ class OzwilloResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
+     * Get Client Id
+     *
+     * @return string
+     */
+    public function getClientId()
+    {
+        return $this->client_id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configureOptions(OptionsResolver $resolver)
