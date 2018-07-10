@@ -79,7 +79,7 @@ class OzwilloResourceOwner extends GenericOAuth2ResourceOwner
      */
     public function getAuthorizationUrl($redirectUri, array $extraParameters = array())
     {
-        return parent::getAuthorizationUrl($redirectUri, array_replace($extraParameters, array('client_id' => $this->client_id)));
+        return parent::getAuthorizationUrl($redirectUri, array_replace($extraParameters, array('client_id' => $this->client_id, 'claims' => "{\"userinfo\":{\"given_name\":{\"essential\": true},\"family_name\":{\"essential\": true}}}")));
     }
 
     /**
